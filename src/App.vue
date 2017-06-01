@@ -1,60 +1,66 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1></h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="book in books">
+          <td><a v-bind:href="book.url">{{book.title}}</a></td>
+          <td>{{book.author}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+
+  import Firebase from 'firebase'
+
+  let config = {
+    apiKey: 'AIzaSyAB73PEkFZgJBWaxcHAqde5Nb7zjfJI8kg',
+    authDomain: 'cyanic-65b0b.firebaseapp.com',
+    databaseURL: 'https://cyanic-65b0b.firebaseio.com',
+    projectId: 'cyanic-65b0b',
+    storageBucket: 'cyanic-65b0b.appspot.com',
+    messagingSenderId: '837405215684'
+  }
+
+  let app = Firebase.initializeApp(config)
+  let db = app.database()
+  let booksRef = db.ref('books')
+
+  export default {
+    name: 'app',
+    data () {
+      return {
+        newBook: {
+          title: '',
+          author: '',
+          url: 'http://'
+        }
+      }
+    },
+    components: {},
+    firebase: {
+      books: booksRef
     }
   }
-}
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style>
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
