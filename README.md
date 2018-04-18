@@ -1,5 +1,7 @@
 # firebase-vue-app
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/LiamDotPro/VueJS-Firebase-App.svg)](https://greenkeeper.io/)
+
 > A test application for vue firebase
 
 ## Build Setup
